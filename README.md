@@ -1,5 +1,4 @@
 # terraform-docker-tailscalify
-WIP
 
 Simple module to serve anything as a tailscale service.
 
@@ -7,7 +6,8 @@ Simple module to serve anything as a tailscale service.
 
 ```hcl
 module "tailscalify" {
-  source       = "joanofxyz/terraform-docker-tailscalify"
+  source       = "joanofxyz/tailscalify/docker"
+  version      = "0.1.2"
   service_name = "<service_name>"
   authkey      = var.TS_AUTHKEY
   ports        = {
