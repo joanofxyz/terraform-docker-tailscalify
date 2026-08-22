@@ -9,11 +9,15 @@ resource "docker_image" "tailscale" {
 }
 
 resource "docker_network" "tailscale" {
-  name = local.network_name
+  name     = local.network_name
+  internal = true
 }
 
 resource "docker_volume" "tailscale" {
   name = local.container_name
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "docker_container" "tailscale" {
@@ -37,7 +41,8 @@ resource "docker_container" "tailscale" {
     )
   ]
   networks_advanced {
-    name = docker_network.tailscale.name
+    name    = docker_network.tailscale.name
+    aliases = [local.container_network_alias]
   }
   mounts {
     type   = "volume"
