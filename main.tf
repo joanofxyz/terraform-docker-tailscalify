@@ -9,8 +9,7 @@ resource "docker_image" "tailscale" {
 }
 
 resource "docker_network" "tailscale" {
-  name     = local.network_name
-  internal = true
+  name = local.network_name
 }
 
 resource "docker_volume" "tailscale" {
