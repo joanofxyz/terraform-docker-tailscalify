@@ -10,6 +10,9 @@ resource "docker_image" "tailscale" {
 
 resource "docker_network" "tailscale" {
   name = local.network_name
+  lifecycle {
+    ignore_changes = [ipam_options]
+  }
 }
 
 resource "docker_volume" "tailscale" {
@@ -55,5 +58,7 @@ resource "docker_container" "tailscale" {
     retries      = 3
     start_period = "15s"
   }
+  lifecycle {
+    ignore_changes = [mounts]
+  }
 }
-
